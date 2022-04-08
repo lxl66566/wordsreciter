@@ -6,4 +6,7 @@
 支持阅读与背诵双模式，多数单词有中英双释
 
 ![image](https://user-images.githubusercontent.com/88281489/160550019-4aa8b438-81a0-4a6c-9b7b-a426e3112adc.png)
-![image](https://user-images.githubusercontent.com/88281489/160550106-234ec3d7-df53-4b71-acfc-8b05ef729cf0.png)
+![image](https://user-images.githubusercontent.com/88281489/160550106-234ec3d7-df53-4b71-acfc-8b05ef729cf0.png)  
+<h4>
+  1.1版本(20220408)：新增日语词库与日语背词功能
+</h4>
