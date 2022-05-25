@@ -12,11 +12,17 @@
 ### v1.1(20220408)
 新增日语词库与日语背词功能
 ### v2.0(20220525)
-为了更好地融入语言环境，v2.0版本将背词方式转为英-英与日-日，使用默认浏览器打开网页背词。（英：[牛津词典](https://www.oxfordlearnersdictionaries.com/) 日：[weblio词典](https://www.weblio.jp/)）
+为了更好地融入语言环境，v2.0版本将背词方式转为英-英与日-日，使用默认浏览器打开网页背词.
 
 同时保留v1.1的全部功能，若想使用原先方法背词请[更改](#settingsjson)`settings.json`。
+
+### v2.1(20220525)
+增加词典网站的切换。同样在`settings.json`内修改。
 ## 说明
 ### settings.json
 `mode`：模式，1为网页打开模式，2为旧版背词模式
 
 `page_nums`：一次性打开网页的数量
+
+
+`website`：英英词典网站，0为 [Merriam-Webster](https://www.merriam-webster.com/) ，1为 [Oxford Learner's Dictionaries](https://www.oxfordlearnersdictionaries.com/)
