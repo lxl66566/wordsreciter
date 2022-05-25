@@ -53,6 +53,7 @@ with open(Path(os.path.dirname(__file__) + '\\words\\' + filenme[cin])) as f:
                 else:
                     url = f'https://www.oxfordlearnersdictionaries.com/definition/english/{i}'
                 webbrowser.open(url,0,True)
+            print('press enter to open next pages')
         elif mode == 2:
             try:
                 s = randint(0,len(data) - 1)
