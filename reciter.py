@@ -6,7 +6,8 @@ sitelib = ['https://www.merriam-webster.com/dictionary/','https://www.oxfordlear
 settingdic = {
     "mode" : 1,
     "page_nums" : 8,
-    "website" : 0
+    "website" : 0,
+    "auto_save_time" : 30
     }
 wrongdict = set([])
 DIRNAME = os.path.dirname(__file__)
@@ -15,7 +16,6 @@ itemname = []
 cin = -1
 WRONGNAME = 'notebook'
 ADD_WRONG_ITEM = '向 ' + WRONGNAME + ' 加入单词'
-AUTO_SAVE_TIME = 30
 
 def loadjson():
     global settingdic,wrongdict
@@ -55,7 +55,7 @@ def addwrongdict():
     begin = time.time()
     try:
         while True:
-            if time.time() - begin > AUTO_SAVE_TIME:
+            if time.time() - begin > settingdic['auto_save_time']:
                 begin = time.time()
                 commitwrong('已自动保存！')
             command = input()
