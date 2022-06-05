@@ -6,6 +6,7 @@ settingswidget::settingswidget(QWidget *parent) :
     ui(new Ui::settingswidget)
 {
     ui->setupUi(this);
+    setWindowTitle("settings");
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->web1,0);
     buttongroup->addButton(ui->web2,1);

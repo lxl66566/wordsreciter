@@ -4,6 +4,7 @@
 #include "callbackwidget.h"
 #include "wordschooser.h"
 #include "settingswidget.h"
+#include "offline.h"
 #include <QMainWindow>
 #include <QRadioButton>
 
@@ -39,6 +40,7 @@ private:
     QTimer * timer;
     QTimer * timer_save;
     settingswidget * setting;
+    offline * offlinewidget;
     int open_pages_num = 10;
     int save_time = 15;
 };

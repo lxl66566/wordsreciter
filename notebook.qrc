@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/words">
-        <file>notebook.json</file>
-    </qresource>
-</RCC>

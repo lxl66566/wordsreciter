@@ -12,15 +12,20 @@ enum filetype{notebook,englishfile,japanesefile};
 class wordschooser
 {
 public:
-    wordschooser(QString lan = "english",filetype ft = notebook);
+    wordschooser(QString lan = "english",filetype ft = notebook,QString route = "notebook.json");
     ~wordschooser();
     void open_a_word(QString);
+    void change_language_with_save(QString);
+    void change_type(filetype);
     void change_language(QString);
-    QJsonObject read_json(QString);
+    void change_file(QString);
+    filetype get_type();
+    QString get_file();
+    QJsonObject read_json();
     QJsonArray get_words_array(QJsonObject);
     void get_words_set();
     QString language_str();
-    QString file_str();
+//    QString file_str(QString r = "notebook.json");
     void add_word(QString);
     bool del_word(QString);
     bool undo();
@@ -31,6 +36,7 @@ public:
     QString get_error_message();
     QString auto_save();
     QString recite(int);
+    QVector<QString> recite_offline();
 private:
     QString language;
     filetype type;
@@ -38,9 +44,10 @@ private:
     QSet<QString> * set;
     QString url;
     QString last;
-    int error = 0;
     bool need_autosave = true;
+    int error = 0;
     QString errormessage;
+    QString fileroute;
 };
 
 #endif // WORDSCHOOSER_H

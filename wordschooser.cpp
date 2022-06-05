@@ -7,18 +7,25 @@
 #include <QSet>
 #include <QDebug>
 
-wordschooser::wordschooser(QString lan,filetype ft)
+wordschooser::wordschooser(QString lan,filetype ft,QString route)
     : language(lan)
     , type(ft)
+    , fileroute(route)
 {
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
     set = new QSet<QString>();
     if (ft == filetype::notebook)
     {
-        rootjsonobj = new QJsonObject(read_json(file_str()));
+        rootjsonobj = new QJsonObject(read_json());
         if(!rootjsonobj->empty())
             get_words_set();
     }
+//    else
+//    {
+//        rootjsonobj = new QJsonObject(read_json());
+//        if(!rootjsonobj->empty())
+//            get_words_set();
+//    }
 }
 
 wordschooser::~wordschooser()
@@ -38,16 +45,44 @@ void wordschooser::open_a_word(QString s)
         QDesktopServices::openUrl(QUrl(url + s));
 }
 
-void wordschooser::change_language(QString s)
+void wordschooser::change_language_with_save(QString s)
 {
     auto_save();
-    language = s;
+    change_language(s);
     get_words_set();
 }
 
-QJsonObject wordschooser::read_json(QString source)
+void wordschooser::change_type(filetype t)
 {
-    QFile file(source);
+    type = t;
+}
+
+void wordschooser::change_language(QString s)
+{
+    language = s;
+}
+
+void wordschooser::change_file(QString s)
+{
+//    if(rootjsonobj)
+//        delete rootjsonobj;
+    fileroute = s;
+    rootjsonobj = new QJsonObject(read_json());
+}
+
+filetype wordschooser::get_type()
+{
+    return type;
+}
+
+QString wordschooser::get_file()
+{
+    return fileroute;
+}
+
+QJsonObject wordschooser::read_json()
+{
+    QFile file(fileroute);
     if(!file.open(QIODevice::ReadOnly)){
         error = 1;
         errormessage = QString("open file failed.");
@@ -88,6 +123,10 @@ void wordschooser::get_words_set()
         for(auto i = temp.begin();i != temp.end();++i)
             set->insert(i->toString());
     }
+    else
+    {
+        *set = (*rootjsonobj).keys().toSet();
+    }
     need_autosave = false;
 }
 
@@ -96,16 +135,11 @@ QString wordschooser::language_str()
     return language;
 }
 
-QString wordschooser::file_str()
-{
-    switch (type) {
-    case filetype::notebook:
-//        return QString(":/words/notebook.json");
-        return QString("notebook.json");
-    default:
-        return QString();
-    }
-}
+//QString wordschooser::file_str(QString r)
+//{
+//    fileroute = r;
+//    return r;
+//}
 
 void wordschooser::add_word(QString s)
 {
@@ -142,7 +176,7 @@ bool wordschooser::save()
     objdefault.insert("default",newarray);
     rootjsonobj->insert(language,objdefault);
     QJsonDocument jDoc(*rootjsonobj);
-    QFile file(file_str());
+    QFile file(fileroute);
     if(!file.open(QIODevice::Truncate | QIODevice::WriteOnly))
     {
         error = 3;
@@ -190,10 +224,34 @@ QString wordschooser::auto_save()
 QString wordschooser::recite(int x)
 {
     QString temp;
-    for(;x > 0;--x)
+    if (type == notebook)
     {
-        temp = select_word_randomly();
-        open_a_word(temp);
+        for(;x > 0;--x)
+        {
+            temp = select_word_randomly();
+            open_a_word(temp);
+        }
+        return temp;
     }
     return temp;
+}
+
+QVector<QString> wordschooser::recite_offline()
+{
+    QVector<QString> a;
+    a.push_back(select_word_randomly());
+    if(type == englishfile)
+    {
+        QJsonObject temp = (*rootjsonobj)[*a.begin()].toObject();
+        if(temp.keys().size() == 0)
+            return recite_offline();
+        a.push_back(temp["中释"].toString());
+        if(temp.keys().size() >= 2)
+            a.push_back(temp["英释"].toString());
+    }
+    else if(type == japanesefile)
+    {
+        a.push_back((*rootjsonobj)[*a.begin()].toString());
+    }
+    return a;
 }

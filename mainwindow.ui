@@ -154,6 +154,7 @@
      <string>options</string>
     </property>
     <addaction name="actionsettings"/>
+    <addaction name="actionoffline_mode"/>
    </widget>
    <addaction name="menuoptions"/>
   </widget>
@@ -161,6 +162,11 @@
   <action name="actionsettings">
    <property name="text">
     <string>settings</string>
+   </property>
+  </action>
+  <action name="actionoffline_mode">
+   <property name="text">
+    <string>offline mode</string>
    </property>
   </action>
  </widget>

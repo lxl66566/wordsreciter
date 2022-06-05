@@ -43,12 +43,12 @@ MainWindow::MainWindow(QWidget *parent)
     reciter->seturl(url_for_endlish);
     connect(buttongroup->button(0),&QAbstractButton::clicked,this,[=](){
         language = "english";
-        reciter->change_language(language);
+        reciter->change_language_with_save(language);
         reciter->seturl(url_for_endlish);
     });
     connect(buttongroup->button(1),&QAbstractButton::clicked,this,[=](){
         language = "japanese";
-        reciter->change_language(language);
+        reciter->change_language_with_save(language);
         reciter->seturl("https://www.weblio.jp/content/");
     });
 
@@ -71,6 +71,13 @@ MainWindow::MainWindow(QWidget *parent)
     });
     connect(ui->recite,&QPushButton::clicked,this,[=](){
         give_message(reciter->recite(open_pages_num));
+    });
+
+    connect(ui->actionoffline_mode,&QAction::triggered,this,[=]()
+    {
+        offlinewidget = new offline();
+        offlinewidget->show();
+        offlinewidget->raise();
     });
 
     timer = new QTimer(this);

@@ -19,34 +19,23 @@ SOURCES += \
     callbackwidget.cpp \
     main.cpp \
     mainwindow.cpp \
+    offline.cpp \
     settingswidget.cpp \
     wordschooser.cpp
 
 HEADERS += \
     callbackwidget.h \
     mainwindow.h \
+    offline.h \
     settingswidget.h \
     wordschooser.h
 
 FORMS += \
     mainwindow.ui \
+    offline.ui \
     settingswidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES +=
-
-win32:CONFIG(release, debug|release): LIBS += -LD:/softwards/Anaconda/envs/pureenv/libs/ -lpython39
-else:win32:CONFIG(debug, debug|release): LIBS += -LD:/softwards/Anaconda/envs/pureenv/libs/ -lpython39d
-else:unix: LIBS += -LD:/softwards/Anaconda/envs/pureenv/libs/ -lpython39
-
-INCLUDEPATH += D:/softwards/Anaconda/envs/pureenv/libs
-DEPENDPATH += D:/softwards/Anaconda/envs/pureenv/libs
-
-INCLUDEPATH += D:/softwards/Anaconda/envs/pureenv/include
-DEPENDPATH += D:/softwards/Anaconda/envs/pureenv/include
-
-DISTFILES +=
