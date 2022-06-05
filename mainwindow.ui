@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>255</width>
+    <width>265</width>
     <height>172</height>
    </rect>
   </property>
@@ -65,7 +65,7 @@
      <string>撤销</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="delete_2">
+   <widget class="QPushButton" name="del">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -83,7 +83,7 @@
      <rect>
       <x>160</x>
       <y>50</y>
-      <width>81</width>
+      <width>231</width>
       <height>31</height>
      </rect>
     </property>
@@ -145,7 +145,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>255</width>
+     <width>265</width>
      <height>26</height>
     </rect>
    </property>

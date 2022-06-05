@@ -7,6 +7,7 @@ callbackwidget::callbackwidget(QWidget * parent)
     : QDialog(parent)
 {
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
+    setAttribute(Qt::WA_DeleteOnClose);
     setWindowOpacity(0.9);
 //    setGeometry(200,200,80,20);
     setFixedSize(80,20);

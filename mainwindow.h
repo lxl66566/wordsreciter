@@ -1,12 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "callbackwidget.h"
+#include "wordschooser.h"
+#include "settingswidget.h"
+#include <QMainWindow>
+#include <QRadioButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+const float show_message_time = 1;
 
 class MainWindow : public QMainWindow
 {
@@ -15,11 +20,26 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void give_message(QString);
+    void clear_message();
+    void add_word();
+private slots:
+    void settings(int,int,QString);
 protected:
-//    void closeEvent(QCloseEvent *);
-    void changeEvent(QEvent *event);
+    void closeEvent(QCloseEvent *);
+    void changeEvent(QEvent *);
+    void keyPressEvent(QKeyEvent *);
 private:
     Ui::MainWindow * ui;
     callbackwidget * callback;
+    QButtonGroup * buttongroup;
+    QString language = "english";
+    QString url_for_endlish = QString("https://www.merriam-webster.com/dictionary/");
+    wordschooser *reciter;
+    QTimer * timer;
+    QTimer * timer_save;
+    settingswidget * setting;
+    int open_pages_num = 10;
+    int save_time = 15;
 };
 #endif // MAINWINDOW_H
