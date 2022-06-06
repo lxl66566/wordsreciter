@@ -9,6 +9,7 @@ offline::offline(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("offline recite mode");
+    setWindowIcon(QIcon("./resource/logo.jpg"));
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->eng1,0);
     buttongroup->addButton(ui->eng2,1);

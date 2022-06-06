@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QButtonGroup>
 #include <QKeyEvent>
+#include <QIcon>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("reciter");
+    setWindowIcon(QIcon("./resource/logo.jpg"));
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     language = "english";

@@ -1,13 +1,27 @@
 {
     "english": {
         "default": [
-            "warranty",
-            "lull",
+            "influencer",
+            "liability",
+            "reserve",
+            "restoration",
             "armchair",
-            "liability"
+            "infrastructure",
+            "warranty",
+            "dismantled",
+            "lull",
+            "commentary",
+            "duress"
         ]
     },
     "japanese": {
-        "default": []
+        "default": [
+            "じんわりと",
+            "ぐっと",
+            "生意気",
+            "意気地なし",
+            "根に持つ",
+            "身勝手"
+        ]
     }
 }
