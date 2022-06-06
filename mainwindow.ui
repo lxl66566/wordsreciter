@@ -155,6 +155,7 @@
     </property>
     <addaction name="actionsettings"/>
     <addaction name="actionoffline_mode"/>
+    <addaction name="actionread_notebook"/>
    </widget>
    <addaction name="menuoptions"/>
   </widget>
@@ -167,6 +168,11 @@
   <action name="actionoffline_mode">
    <property name="text">
     <string>offline mode</string>
+   </property>
+  </action>
+  <action name="actionread_notebook">
+   <property name="text">
+    <string>read notebook</string>
    </property>
   </action>
  </widget>

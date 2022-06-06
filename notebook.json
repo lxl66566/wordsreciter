@@ -1,27 +1,39 @@
 {
     "english": {
         "default": [
+            "ailing",
+            "vigor",
+            "trump",
             "influencer",
-            "liability",
-            "reserve",
-            "restoration",
-            "armchair",
-            "infrastructure",
-            "warranty",
             "dismantled",
             "lull",
+            "bureaucratic",
+            "exert",
+            "reserve",
+            "vibrant",
+            "warranty",
+            "liability",
+            "infrastructure",
             "commentary",
-            "duress"
+            "duress",
+            "restoration",
+            "bustling",
+            "traction",
+            "mired",
+            "beneficiary",
+            "armchair"
         ]
     },
     "japanese": {
         "default": [
             "じんわりと",
             "ぐっと",
+            "身勝手",
             "生意気",
             "意気地なし",
+            "ウイルス",
             "根に持つ",
-            "身勝手"
+            "したがって"
         ]
     }
 }

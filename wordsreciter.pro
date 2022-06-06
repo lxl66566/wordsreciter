@@ -20,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     offline.cpp \
+    see_notebook_widget.cpp \
     settingswidget.cpp \
     wordschooser.cpp
 
@@ -27,12 +28,14 @@ HEADERS += \
     callbackwidget.h \
     mainwindow.h \
     offline.h \
+    see_notebook_widget.h \
     settingswidget.h \
     wordschooser.h
 
 FORMS += \
     mainwindow.ui \
     offline.ui \
+    see_notebook_widget.ui \
     settingswidget.ui
 
 # Default rules for deployment.

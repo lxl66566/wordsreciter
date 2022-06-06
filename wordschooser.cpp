@@ -7,25 +7,19 @@
 #include <QSet>
 #include <QDebug>
 
-wordschooser::wordschooser(QString lan,filetype ft,QString route)
+wordschooser::wordschooser(QString lan,filetype ft,QString route/*,bool only_read_json*/)
     : language(lan)
     , type(ft)
     , fileroute(route)
 {
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
     set = new QSet<QString>();
-    if (ft == filetype::notebook)
+    if (ft == filetype::notebook/* && !only_read_json*/)
     {
         rootjsonobj = new QJsonObject(read_json());
         if(!rootjsonobj->empty())
             get_words_set();
     }
-//    else
-//    {
-//        rootjsonobj = new QJsonObject(read_json());
-//        if(!rootjsonobj->empty())
-//            get_words_set();
-//    }
 }
 
 wordschooser::~wordschooser()
@@ -112,7 +106,7 @@ QJsonArray wordschooser::get_words_array(QJsonObject rootobj)
     return QJsonArray();
 }
 
-void wordschooser::get_words_set()
+QSet<QString> wordschooser::get_words_set()
 {
     set->clear();
     set->squeeze();
@@ -128,6 +122,7 @@ void wordschooser::get_words_set()
         *set = (*rootjsonobj).keys().toSet();
     }
     need_autosave = false;
+    return *set;
 }
 
 QString wordschooser::language_str()

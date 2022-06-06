@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     language = "english";
 
     callback = new callbackwidget(this);
-    callback->setAttribute(Qt::WA_DeleteOnClose);
     callback->hide();
     connect(callback,&callbackwidget::activate,this,[=](){
         show();
@@ -80,6 +79,12 @@ MainWindow::MainWindow(QWidget *parent)
         offlinewidget = new offline();
         offlinewidget->show();
         offlinewidget->raise();
+    });
+    connect(ui->actionread_notebook,&QAction::triggered,this,[=]()
+    {
+        notebook_widget = new see_notebook_widget();
+        notebook_widget->show();
+        notebook_widget->raise();
     });
 
     timer = new QTimer(this);
