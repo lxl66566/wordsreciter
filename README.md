@@ -1,5 +1,5 @@
 # wordsreciter GUI by C++ & Qt5
-由于python dos窗口程序使用不便，tkinter功能不能满足，因此开发C++ Qt5 GUI版本的wordsreciter.
+由于python dos窗口程序使用不便，tkinter功能不能满足，因此开发C++ Qt5 GUI版本的wordsreciter.（嘶，现在发现用pyqt5或者ttkbootstrap会更好...）
 
 （GUI v1.1.0报--）GUI版本功能已全面复刻或超越dos版本。建议前往release下载最新GUI版。
 
