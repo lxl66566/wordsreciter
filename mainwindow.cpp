@@ -6,6 +6,7 @@
 #include <QButtonGroup>
 #include <QKeyEvent>
 #include <QIcon>
+#include <QVector>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +19,15 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     language = "english";
 
+    elements.push_back(ui->del);
+    elements.push_back(ui->undo);
+    elements.push_back(ui->word);
+    elements.push_back(ui->submit);
+    elements.push_back(ui->recite);
+    elements.push_back(ui->english);
+    elements.push_back(ui->japanese);
+    elements.push_back(ui->message);
+
     callback = new callbackwidget(this);
     callback->hide();
     connect(callback,&callbackwidget::activate,this,[=](){
@@ -28,13 +38,13 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     reciter = new wordschooser(language,notebook);
+    setting = new settingswidget(this);
+    setting->hide();
+    connect(setting,SIGNAL(ok(int,int,QString)),this,SLOT(settings(int,int,QString)));
 
     connect(ui->actionsettings,&QAction::triggered,this,[=](){
-        if(create_a_new_settingwidget)
-        {
-            create_a_new_settingwidget = false;
-            setting = new settingswidget();
-            connect(setting,SIGNAL(ok(int,int,QString)),this,SLOT(settings(int,int,QString)));
+        for (auto i = elements.begin();i != elements.end();++i) {
+            (*i)->hide();
         }
         setting->show();
         setting->raise();
@@ -128,6 +138,9 @@ void MainWindow::add_word()
 
 void MainWindow::settings(int words_num, int autosavetime, QString website)
 {
+    for (auto i = elements.begin();i != elements.end();++i) {
+        (*i)->show();
+    }
     save_time = autosavetime;
     open_pages_num = words_num;
     url_for_endlish = website;
