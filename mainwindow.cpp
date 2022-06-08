@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("reciter");
-    setWindowIcon(QIcon("./resource/logo.jpg"));
+    setWindowIcon(QIcon(":/icon/icon.ico"));
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     language = "english";
@@ -28,14 +28,17 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     reciter = new wordschooser(language,notebook);
-    setting = new settingswidget();
-    setting->hide();
 
     connect(ui->actionsettings,&QAction::triggered,this,[=](){
+        if(create_a_new_settingwidget)
+        {
+            create_a_new_settingwidget = false;
+            setting = new settingswidget();
+            connect(setting,SIGNAL(ok(int,int,QString)),this,SLOT(settings(int,int,QString)));
+        }
         setting->show();
         setting->raise();
     });
-    connect(setting,SIGNAL(ok(int,int,QString)),this,SLOT(settings(int,int,QString)));
 
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->english,0);

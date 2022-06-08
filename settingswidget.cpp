@@ -7,19 +7,21 @@ settingswidget::settingswidget(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("settings");
-    setWindowIcon(QIcon("./resource/logo.jpg"));
+    setWindowIcon(QIcon(":/icon/icon.ico"));
+    setAttribute(Qt::WA_DeleteOnClose);
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->web1,0);
     buttongroup->addButton(ui->web2,1);
     connect(ui->okbutton,&QPushButton::clicked,this,[=]()
     {
-        hide();
         QString url;
         if(buttongroup->button(0)->isChecked())
             url = QString("https://www.merriam-webster.com/dictionary/");
         else if(buttongroup->button(1)->isChecked())
             url = QString("https://www.oxfordlearnersdictionaries.com/definition/english/");
         emit ok(ui->page->value(),ui->autosavetime->value(),url);
+//        close();
+        hide();
     });
 }
 

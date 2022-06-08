@@ -25,7 +25,6 @@ wordschooser::wordschooser(QString lan,filetype ft,QString route/*,bool only_rea
 wordschooser::~wordschooser()
 {
     delete set;
-    delete rootjsonobj;
 }
 
 int randint(int x,int y)

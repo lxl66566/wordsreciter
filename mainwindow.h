@@ -45,5 +45,6 @@ private:
     see_notebook_widget * notebook_widget;
     int open_pages_num = 10;
     int save_time = 15;
+    bool create_a_new_settingwidget = true;
 };
 #endif // MAINWINDOW_H

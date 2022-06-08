@@ -7,7 +7,8 @@ see_notebook_widget::see_notebook_widget(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("my notebook");
-    setWindowIcon(QIcon("./resource/logo.jpg"));
+    setWindowIcon(QIcon(":/icon/icon.ico"));
+    setAttribute(Qt::WA_DeleteOnClose);
     reciter = new wordschooser("english",notebook,"notebook.json");
     set_text("english");
     set_text("japanese");
