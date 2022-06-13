@@ -7,7 +7,7 @@ settingswidget::settingswidget(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("settings");
-    setWindowIcon(QIcon(":/icon/icon.ico"));
+//    setWindowIcon(QIcon(":/icon/icon.ico"));
 //    setAttribute(Qt::WA_DeleteOnClose);
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->web1,0);

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("reciter");
-    setWindowIcon(QIcon(":/icon/icon.ico"));
+//    setWindowIcon(QIcon(":/icon/icon.ico"));
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     language = "english";
@@ -172,5 +172,14 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 {
     if(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return)
         add_word();
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_Backslash)
+    {
+        ui->word->backspace();
+        showMinimized();
+    }
 }
 

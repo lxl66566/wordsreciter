@@ -31,6 +31,7 @@ protected:
     void closeEvent(QCloseEvent *);
     void changeEvent(QEvent *);
     void keyPressEvent(QKeyEvent *);
+    void keyReleaseEvent(QKeyEvent *);
 private:
     Ui::MainWindow * ui;
     callbackwidget * callback;

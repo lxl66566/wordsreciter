@@ -9,7 +9,7 @@ offline::offline(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("offline recite mode");
-    setWindowIcon(QIcon(":/icon/icon.ico"));
+//    setWindowIcon(QIcon(":/icon/icon.ico"));
     setAttribute(Qt::WA_DeleteOnClose);
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->eng1,0);

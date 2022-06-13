@@ -43,7 +43,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    res.qrc
+RESOURCES +=
 
 RC_ICONS = icon.ico
+VERSION = 1.1.2
+QMAKE_TARGET_DESCRIPTION = "Help recite English or Japanese words"

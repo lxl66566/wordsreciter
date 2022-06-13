@@ -51,3 +51,4 @@ void callbackwidget::mouseReleaseEvent(QMouseEvent *)
     }
     moved = false;
 }
+
