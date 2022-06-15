@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
         showNormal();
         raise();
         activateWindow();
+        ui->word->setFocus();
     });
 
     reciter = new wordschooser(language,notebook);
@@ -163,7 +164,7 @@ void MainWindow::closeEvent(QCloseEvent *)
 
 void MainWindow::changeEvent(QEvent *event)
 {
-    if(event->type()!=QEvent::WindowStateChange) return;
+    if(event->type() != QEvent::WindowStateChange) return;
     if(this->windowState() == Qt::WindowMinimized)
     {
         hide();
@@ -179,9 +180,10 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e)
 {
-    if(e->key() == Qt::Key_Insert)
+    if(e->key() == Qt::Key_Insert || e->key() == Qt::Key_PageUp || e->key() == Qt::Key_PageDown)
     {
-        showMinimized();
+        hide();
+        callback->show();
     }
 }
 
