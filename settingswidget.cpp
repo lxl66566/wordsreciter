@@ -25,7 +25,7 @@ settingswidget::settingswidget(QWidget *parent) :
         if(buttongroup2->button(0)->isChecked())
             url2 = QString("https://www.weblio.jp/content/");
         else if(buttongroup2->button(1)->isChecked())
-            url2 = QString("https://dictionary.goo.ne.jp/word/");
+            url2 = QString("https://dictionary.goo.ne.jp/srch/jn/");
         emit ok(ui->page->value(),ui->autosavetime->value(),url,url2);
 //        close();
         hide();
