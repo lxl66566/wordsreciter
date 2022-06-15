@@ -12,14 +12,21 @@ settingswidget::settingswidget(QWidget *parent) :
     buttongroup = new QButtonGroup(this);
     buttongroup->addButton(ui->web1,0);
     buttongroup->addButton(ui->web2,1);
+    buttongroup2 = new QButtonGroup(this);
+    buttongroup2->addButton(ui->web3,0);
+    buttongroup2->addButton(ui->web4,1);
     connect(ui->okbutton,&QPushButton::clicked,this,[=]()
     {
-        QString url;
+        QString url,url2;
         if(buttongroup->button(0)->isChecked())
             url = QString("https://www.merriam-webster.com/dictionary/");
         else if(buttongroup->button(1)->isChecked())
             url = QString("https://www.oxfordlearnersdictionaries.com/definition/english/");
-        emit ok(ui->page->value(),ui->autosavetime->value(),url);
+        if(buttongroup2->button(0)->isChecked())
+            url2 = QString("https://www.weblio.jp/content/");
+        else if(buttongroup2->button(1)->isChecked())
+            url2 = QString("https://dictionary.goo.ne.jp/word/");
+        emit ok(ui->page->value(),ui->autosavetime->value(),url,url2);
 //        close();
         hide();
     });

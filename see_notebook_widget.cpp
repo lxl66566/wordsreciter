@@ -17,7 +17,6 @@ see_notebook_widget::see_notebook_widget(QWidget *parent) :
 see_notebook_widget::~see_notebook_widget()
 {
     delete ui;
-    delete reciter;
 }
 
 void see_notebook_widget::set_text(QString language)

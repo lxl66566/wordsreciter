@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("reciter");
-//    setWindowIcon(QIcon(":/icon/icon.ico"));
+    setAttribute(Qt::WA_DeleteOnClose);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     language = "english";
@@ -38,10 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     reciter = new wordschooser(language,notebook);
+
     setting = new settingswidget(this);
     setting->hide();
-    connect(setting,SIGNAL(ok(int,int,QString)),this,SLOT(settings(int,int,QString)));
-
+    connect(setting,&settingswidget::ok,this,&MainWindow::settings);
     connect(ui->actionsettings,&QAction::triggered,this,[=](){
         for (auto i = elements.begin();i != elements.end();++i) {
             (*i)->hide();
@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(buttongroup->button(1),&QAbstractButton::clicked,this,[=](){
         language = "japanese";
         reciter->change_language_with_save(language);
-        reciter->seturl("https://www.weblio.jp/content/");
+        reciter->seturl(url_for_japanese);
     });
 
     ui->message->setText(reciter->get_error_message());
@@ -113,7 +113,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete callback;
 }
 
 void MainWindow::give_message(QString s)
@@ -136,7 +135,7 @@ void MainWindow::add_word()
     ui->word->setFocus();
 }
 
-void MainWindow::settings(int words_num, int autosavetime, QString website)
+void MainWindow::settings(int words_num, int autosavetime, QString website, QString url2)
 {
     for (auto i = elements.begin();i != elements.end();++i) {
         (*i)->show();
@@ -144,18 +143,22 @@ void MainWindow::settings(int words_num, int autosavetime, QString website)
     save_time = autosavetime;
     open_pages_num = words_num;
     url_for_endlish = website;
+    url_for_japanese = url2;
     ui->recite->setText("我要背" + QString::number(open_pages_num) + "个！");
     if (language == QString("english"))
         reciter->seturl(url_for_endlish);
+    else reciter->seturl(url_for_japanese);
 }
 
 void MainWindow::closeEvent(QCloseEvent *)
 {
-    auto temp = reciter->save();
-    if(temp != QString("保存失败"))
+    auto temp = reciter->auto_save();
+    if(temp != QString("自动保存失败"))
+    {
+        callback->close();
         exit(0);
+    }
     else ui->message->setText("保存失败...");
-    callback->close();
 }
 
 void MainWindow::changeEvent(QEvent *event)
@@ -176,9 +179,8 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e)
 {
-    if(e->key() == Qt::Key_Backslash)
+    if(e->key() == Qt::Key_Insert)
     {
-        ui->word->backspace();
         showMinimized();
     }
 }

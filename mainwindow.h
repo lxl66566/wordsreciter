@@ -26,7 +26,7 @@ public:
     void clear_message();
     void add_word();
 private slots:
-    void settings(int,int,QString);
+    void settings(int,int,QString,QString);
 protected:
     void closeEvent(QCloseEvent *);
     void changeEvent(QEvent *);
@@ -38,6 +38,7 @@ private:
     QButtonGroup * buttongroup;
     QString language = "english";
     QString url_for_endlish = QString("https://www.merriam-webster.com/dictionary/");
+    QString url_for_japanese = QString("https://www.weblio.jp/content/");
     wordschooser *reciter;
     QTimer * timer;
     QTimer * timer_save;

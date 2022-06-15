@@ -15,13 +15,13 @@ class settingswidget : public QWidget
 public:
     explicit settingswidget(QWidget *parent = nullptr);
     ~settingswidget();
-    QButtonGroup *buttongroup;
+    QButtonGroup *buttongroup,*buttongroup2;
 
 private:
     Ui::settingswidget *ui;
 
 signals:
-    void ok(int,int,QString);
+    void ok(int,int,QString,QString);
 };
 
 #endif // SETTINGSWIDGET_H

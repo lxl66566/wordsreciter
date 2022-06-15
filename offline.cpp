@@ -58,8 +58,6 @@ offline::offline(QWidget *parent) :
 offline::~offline()
 {
     delete ui;
-    delete reciter;
-    delete buttongroup;
 }
 
 void offline::flush_text()
