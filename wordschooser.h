@@ -19,6 +19,7 @@ public:
     void change_type(filetype);
     void change_language(QString);
     void change_file(QString);
+    void clear_last();
     filetype get_type();
     QString get_file();
     QJsonObject read_json();
@@ -30,12 +31,14 @@ public:
     bool del_word(QString);
     bool undo();
     bool save();
+    QString get_last();
     QString seturl(const QString);
     QString get_url();
     QString select_word_randomly();
     QString get_error_message();
     QString auto_save();
     QString recite(int);
+    QString recite_last();
     QVector<QString> recite_offline();
 private:
     QString language;

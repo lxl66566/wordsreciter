@@ -47,6 +47,6 @@ private:
     see_notebook_widget * notebook_widget;
     int open_pages_num = 10;
     int save_time = 15;
-    QVector<QWidget*> elements;
+//    QVector<QWidget*> elements;
 };
 #endif // MAINWINDOW_H

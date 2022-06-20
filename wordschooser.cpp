@@ -66,6 +66,11 @@ void wordschooser::change_file(QString s)
     rootjsonobj = new QJsonObject(read_json());
 }
 
+void wordschooser::clear_last()
+{
+    last = QString();
+}
+
 filetype wordschooser::get_type()
 {
     return type;
@@ -188,6 +193,11 @@ bool wordschooser::save()
     return true;
 }
 
+QString wordschooser::get_last()
+{
+    return last;
+}
+
 QString wordschooser::select_word_randomly()
 {
     if(set->empty()) return QString();
@@ -231,6 +241,12 @@ QString wordschooser::recite(int x)
         return temp;
     }
     return temp;
+}
+
+QString wordschooser::recite_last()
+{
+    if(last.isEmpty()) return QString();
+    return last;
 }
 
 QVector<QString> wordschooser::recite_offline()

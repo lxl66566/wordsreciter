@@ -7,7 +7,13 @@
 #include <QKeyEvent>
 #include <QIcon>
 #include <QVector>
-
+bool is_alpha(QString s)
+{
+    for(auto i = s.begin();i != s.end();++i)
+        if(!((*i) >= 'a' && (*i) <= 'z') && !((*i) >= 'A' && (*i) <= 'Z'))
+            return false;
+    return true;
+}
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -18,15 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     language = "english";
-
-    elements.push_back(ui->del);
-    elements.push_back(ui->undo);
-    elements.push_back(ui->word);
-    elements.push_back(ui->submit);
-    elements.push_back(ui->recite);
-    elements.push_back(ui->english);
-    elements.push_back(ui->japanese);
-    elements.push_back(ui->message);
 
     callback = new callbackwidget(this);
     callback->hide();
@@ -44,9 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     setting->hide();
     connect(setting,&settingswidget::ok,this,&MainWindow::settings);
     connect(ui->actionsettings,&QAction::triggered,this,[=](){
-        for (auto i = elements.begin();i != elements.end();++i) {
-            (*i)->hide();
-        }
+        ui->elements->hide();
         setting->show();
         setting->raise();
     });
@@ -60,11 +55,13 @@ MainWindow::MainWindow(QWidget *parent)
         language = "english";
         reciter->change_language_with_save(language);
         reciter->seturl(url_for_endlish);
+        reciter->clear_last();
     });
     connect(buttongroup->button(1),&QAbstractButton::clicked,this,[=](){
         language = "japanese";
         reciter->change_language_with_save(language);
         reciter->seturl(url_for_japanese);
+        reciter->clear_last();
     });
 
     ui->message->setText(reciter->get_error_message());
@@ -86,6 +83,15 @@ MainWindow::MainWindow(QWidget *parent)
     });
     connect(ui->recite,&QPushButton::clicked,this,[=](){
         give_message(reciter->recite(open_pages_num));
+    });
+    connect(ui->recite_last,&QPushButton::clicked,this,[=](){
+        QString temp = reciter->get_last();
+        if(temp.isEmpty())
+        {
+            give_message("未找到最近一个");
+            return;
+        }
+        reciter->open_a_word(temp);
     });
 
     connect(ui->actionoffline_mode,&QAction::triggered,this,[=]()
@@ -129,7 +135,30 @@ void MainWindow::clear_message()
 
 void MainWindow::add_word()
 {
-    if(ui->word->text().isEmpty()) return;
+    if(ui->word->text().isEmpty())
+    {
+        give_message("请输入单词！");
+        return;
+    }
+    if(is_alpha(ui->word->text()))
+    {
+        if (language != "english")
+        {
+            language = "english";
+            reciter->change_language_with_save("english");
+            reciter->seturl(url_for_endlish);
+            ui->english->setChecked(true);
+        }
+    }
+    else{
+        if (language != "japanese")
+        {
+            language = "japanese";
+            reciter->change_language_with_save("japanese");
+            reciter->seturl(url_for_japanese);
+            ui->japanese->setChecked(true);
+        }
+    }
     reciter->add_word(ui->word->text());
     give_message("添加成功！");
     ui->word->clear();
@@ -138,14 +167,15 @@ void MainWindow::add_word()
 
 void MainWindow::settings(int words_num, int autosavetime, QString website, QString url2)
 {
-    for (auto i = elements.begin();i != elements.end();++i) {
-        (*i)->show();
-    }
+//    for (auto i = elements.begin();i != elements.end();++i) {
+//        (*i)->show();
+//    }
+    ui->elements->show();
     save_time = autosavetime;
     open_pages_num = words_num;
     url_for_endlish = website;
     url_for_japanese = url2;
-    ui->recite->setText("我要背" + QString::number(open_pages_num) + "个！");
+    ui->recite->setText("背" + QString::number(open_pages_num) + "个");
     if (language == QString("english"))
         reciter->seturl(url_for_endlish);
     else reciter->seturl(url_for_japanese);
