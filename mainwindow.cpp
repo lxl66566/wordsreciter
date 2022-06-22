@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(setting,&settingswidget::ok,this,&MainWindow::settings);
     connect(ui->actionsettings,&QAction::triggered,this,[=](){
         ui->elements->hide();
+        ui->menubar->hide();
         setting->show();
         setting->raise();
     });
@@ -167,10 +168,8 @@ void MainWindow::add_word()
 
 void MainWindow::settings(int words_num, int autosavetime, QString website, QString url2)
 {
-//    for (auto i = elements.begin();i != elements.end();++i) {
-//        (*i)->show();
-//    }
     ui->elements->show();
+    ui->menubar->show();
     save_time = autosavetime;
     open_pages_num = words_num;
     url_for_endlish = website;

@@ -145,10 +145,10 @@ QString wordschooser::language_str()
 
 void wordschooser::add_word(QString s)
 {
-    int temp = set->size();
+//    int temp = set->size();
     if(s.isEmpty()) return;
     set->insert(s);
-    if(temp != set->size())//一次有效添加
+//    if(temp != set->size())//一次有效添加（已弃用
         last = s;
     need_autosave = true;
 }

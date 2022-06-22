@@ -15,10 +15,14 @@ class settingswidget : public QWidget
 public:
     explicit settingswidget(QWidget *parent = nullptr);
     ~settingswidget();
-    QButtonGroup *buttongroup,*buttongroup2;
+    void OK();
 
 private:
     Ui::settingswidget *ui;
+    QButtonGroup *buttongroup,*buttongroup2;
+
+protected:
+    void keyPressEvent(QKeyEvent *);
 
 signals:
     void ok(int,int,QString,QString);
