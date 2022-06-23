@@ -23,17 +23,18 @@ MainWindow::MainWindow(QWidget *parent)
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowFlags(Qt::WindowStaysOnTopHint);
     setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+//    setFocusPolicy(Qt::StrongFocus);
     language = "english";
 
     callback = new callbackwidget(this);
     callback->hide();
-    connect(callback,&callbackwidget::activate,this,[=](){
-        show();
-        showNormal();
-        raise();
-        activateWindow();
-        ui->word->setFocus();
-    });
+    connect(callback,&callbackwidget::activate,this,&MainWindow::activated);
+//        show();
+//        showNormal();
+//        raise();
+//        activateWindow();
+//        ui->word->setFocus();
+//    });
 
     reciter = new wordschooser(language,notebook);
 
@@ -168,6 +169,24 @@ void MainWindow::add_word()
     ui->word->setFocus();
 }
 
+void MainWindow::activated()
+{
+    switch (isVisible()) {
+        case true:
+            this->hide();
+            callback->show();
+            break;
+        default:
+            show();
+            showNormal();
+            raise();
+            activateWindow();
+            ui->word->setFocus();
+            callback->hide();
+            break;
+        }
+}
+
 void MainWindow::settings(int words_num, int autosavetime, QString website, QString url2)
 {
     ui->elements->show();
@@ -220,5 +239,10 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
         hide();
         callback->show();
     }
+}
+
+void MainWindow::focusInEvent(QFocusEvent *)
+{
+    ui->word->setFocus();
 }
 

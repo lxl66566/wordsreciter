@@ -27,11 +27,13 @@ public:
     void add_word();
 private slots:
     void settings(int,int,QString,QString);
+    void activated();
 protected:
     void closeEvent(QCloseEvent *);
     void changeEvent(QEvent *);
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
+    void focusInEvent(QFocusEvent *);
 private:
     Ui::MainWindow * ui;
     callbackwidget * callback;
@@ -46,7 +48,7 @@ private:
     offline * offlinewidget;
     see_notebook_widget * notebook_widget;
     int open_pages_num = 10;
-    int save_time = 15;
+    int save_time = 30;
 //    QVector<QWidget*> elements;
 };
 #endif // MAINWINDOW_H

@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     callbackwidget.cpp \
+    globalshortcut.cpp \
     main.cpp \
     mainwindow.cpp \
     offline.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     callbackwidget.h \
+    globalshortcut.h \
     mainwindow.h \
     offline.h \
     see_notebook_widget.h \
@@ -46,5 +48,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES +=
 
 RC_ICONS = icon.ico
-VERSION = 1.1.2
+VERSION = 1.2.1
 QMAKE_TARGET_DESCRIPTION = "Help recite English or Japanese words"
