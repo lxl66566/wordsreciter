@@ -69,10 +69,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->submit,&QPushButton::clicked,this,&MainWindow::add_word);
     connect(ui->undo,&QPushButton::clicked,this,[=]()
     {
-        if(reciter->undo())
+        auto temp = reciter->undo();
+        if(!temp.isEmpty())
             give_message("撤销成功！");
         else give_message("单词不存在");
-        ui->word->clear();
+        ui->word->insert(temp);
+        ui->word->setFocus();
     });
     connect(ui->del,&QPushButton::clicked,this,[=]()
     {
@@ -198,6 +200,10 @@ void MainWindow::changeEvent(QEvent *event)
     {
         hide();
         callback->show();
+    }
+    else if(this->windowState() == Qt::WindowMaximized)
+    {
+        ui->word->setFocus();
     }
 }
 

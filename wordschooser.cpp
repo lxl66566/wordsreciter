@@ -160,10 +160,11 @@ bool wordschooser::del_word(QString s)
     return set->remove(s);
 }
 
-bool wordschooser::undo()
+QString wordschooser::undo()
 {
-    if (last.isEmpty()) return false;
-    bool temp = del_word(last);
+    if (last.isEmpty()) return QString();
+    auto temp = last;
+    del_word(last);
     last = QString();
     need_autosave = true;
     return temp;
