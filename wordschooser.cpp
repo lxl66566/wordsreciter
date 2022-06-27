@@ -82,7 +82,12 @@ QString wordschooser::get_file()
 QJsonObject wordschooser::read_json()
 {
     QFile file(fileroute);
-    if(!file.open(QIODevice::ReadOnly)){
+    int tempflag = 4;
+    while(!file.open(QIODevice::ReadOnly) && --tempflag){
+        save(1);
+    }
+    if(tempflag == 0)
+    {
         error = 1;
         errormessage = QString("open file failed.");
         qDebug() << error;
@@ -168,15 +173,28 @@ QString wordschooser::undo()
     return temp;
 }
 
-bool wordschooser::save()
+bool wordschooser::save(int mode)
 {
-    QJsonArray newarray = QJsonArray();
-    for(auto i = set->begin();i != set->end();++i)
-        newarray.push_back(*i);
-    QJsonObject objdefault;
-    objdefault.insert("default",newarray);
-    rootjsonobj->insert(language,objdefault);
-    QJsonDocument jDoc(*rootjsonobj);
+    QJsonDocument jDoc;
+    if (mode == 0)
+    {
+        QJsonArray newarray;
+        for(auto i = set->begin();i != set->end();++i)
+            newarray.push_back(*i);
+        QJsonObject objdefault;
+        objdefault.insert("default",newarray);
+        rootjsonobj->insert(language,objdefault);
+        jDoc = QJsonDocument(*rootjsonobj);
+    }
+    else if(mode == 1)
+    {
+        QJsonObject roottemp,objdefault;
+        objdefault.insert("default",QJsonArray());
+        roottemp.insert("english",objdefault);
+        roottemp.insert("japanese",objdefault);
+        jDoc = QJsonDocument(roottemp);
+    }
+
     QFile file(fileroute);
     if(!file.open(QIODevice::Truncate | QIODevice::WriteOnly))
     {

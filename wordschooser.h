@@ -29,7 +29,7 @@ public:
 //    QString file_str(QString r = "notebook.json");
     void add_word(QString);
     bool del_word(QString);
-    bool save();
+    bool save(int mode = 0);
     QString undo();
     QString get_last();
     QString seturl(const QString);
