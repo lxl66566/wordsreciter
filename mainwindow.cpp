@@ -34,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     setting = new settingswidget(this);
     setting->hide();
+    settings(setting->pages,setting->auto_save_time,
+            !setting->eng_selected ? setting->urls[0] : setting->urls[1],
+            !setting->jap_selected ? setting->urls[2] : setting->urls[3]);
     connect(setting,&settingswidget::ok,this,&MainWindow::settings);
     connect(ui->actionsettings,&QAction::triggered,this,[=](){
         ui->elements->hide();

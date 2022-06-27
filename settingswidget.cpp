@@ -60,9 +60,6 @@ settingswidget::~settingswidget()
 
 void settingswidget::OK()
 {
-    pages = ui->page->value();
-    auto_save_time = ui->autosavetime->value();
-
     QString url,url2;
     url = !eng_selected ? urls[0] : urls[1];
     url2 = !jap_selected ? urls[2] : urls[3];
