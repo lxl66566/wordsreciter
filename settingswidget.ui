@@ -119,9 +119,9 @@
   <widget class="QPushButton" name="okbutton">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>140</x>
      <y>130</y>
-     <width>81</width>
+     <width>91</width>
      <height>28</height>
     </rect>
    </property>
@@ -170,6 +170,19 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="diyurl">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>130</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>自定义网站</string>
+   </property>
   </widget>
  </widget>
  <resources/>

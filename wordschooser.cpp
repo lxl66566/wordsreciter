@@ -35,10 +35,8 @@ int randint(int x,int y)
 void wordschooser::open_a_word(QString s)
 {
     if (s.isEmpty()) return;
-    QString temp = url + s;
-    if(url == QString("https://dictionary.goo.ne.jp/srch/jn/"))
-        temp += QString("/m6u/");
-    QDesktopServices::openUrl(QUrl(temp));
+    QString temp = url;
+    QDesktopServices::openUrl(QUrl(temp.replace(QString("{}"),s)));
 }
 
 void wordschooser::change_language_with_save(QString s)

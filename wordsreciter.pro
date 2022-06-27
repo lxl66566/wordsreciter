@@ -23,6 +23,7 @@ SOURCES += \
     offline.cpp \
     see_notebook_widget.cpp \
     settingswidget.cpp \
+    url_settingswidget.cpp \
     wordschooser.cpp
 
 HEADERS += \
@@ -32,13 +33,15 @@ HEADERS += \
     offline.h \
     see_notebook_widget.h \
     settingswidget.h \
+    url_settingswidget.h \
     wordschooser.h
 
 FORMS += \
     mainwindow.ui \
     offline.ui \
     see_notebook_widget.ui \
-    settingswidget.ui
+    settingswidget.ui \
+    url_settingswidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

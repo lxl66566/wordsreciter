@@ -29,12 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     callback = new callbackwidget(this);
     callback->hide();
     connect(callback,&callbackwidget::activate,this,&MainWindow::activated);
-//        show();
-//        showNormal();
-//        raise();
-//        activateWindow();
-//        ui->word->setFocus();
-//    });
 
     reciter = new wordschooser(language,notebook);
 
@@ -141,7 +135,8 @@ void MainWindow::add_word()
 {
     if(ui->word->text().isEmpty())
     {
-        give_message("请输入单词！");
+//        give_message("请输入单词！");
+        activated();
         return;
     }
     if(is_alpha(ui->word->text()))
@@ -232,14 +227,14 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         add_word();
 }
 
-void MainWindow::keyReleaseEvent(QKeyEvent *e)
-{
-    if(e->key() == Qt::Key_Insert || e->key() == Qt::Key_PageUp || e->key() == Qt::Key_PageDown)
-    {
-        hide();
-        callback->show();
-    }
-}
+//void MainWindow::keyReleaseEvent(QKeyEvent *e)
+//{
+//    if(e->key() == Qt::Key_Insert || e->key() == Qt::Key_PageUp || e->key() == Qt::Key_PageDown)
+//    {
+//        hide();
+//        callback->show();
+//    }
+//}
 
 void MainWindow::focusInEvent(QFocusEvent *)
 {

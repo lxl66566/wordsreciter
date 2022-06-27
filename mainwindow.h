@@ -32,15 +32,15 @@ protected:
     void closeEvent(QCloseEvent *);
     void changeEvent(QEvent *);
     void keyPressEvent(QKeyEvent *);
-    void keyReleaseEvent(QKeyEvent *);
+//    void keyReleaseEvent(QKeyEvent *);
     void focusInEvent(QFocusEvent *);
 private:
     Ui::MainWindow * ui;
     callbackwidget * callback;
     QButtonGroup * buttongroup;
     QString language = "english";
-    QString url_for_endlish = QString("https://www.merriam-webster.com/dictionary/");
-    QString url_for_japanese = QString("https://www.weblio.jp/content/");
+    QString url_for_endlish = QString("https://www.merriam-webster.com/dictionary/{}");
+    QString url_for_japanese = QString("https://www.weblio.jp/content/{}");
     wordschooser *reciter;
     QTimer * timer;
     QTimer * timer_save;
