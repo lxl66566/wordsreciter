@@ -91,3 +91,7 @@ Path("reverse.txt").write_text(''.join(reversed),encoding='utf-8')
 
 with open('./exceptbook.json','w',encoding='utf-8') as f:
     json.dump(list(exceptbook),f,indent=4, ensure_ascii=False)
+
+import find_invalid
+for i in range(2):
+    find_invalid.go()
