@@ -7,6 +7,7 @@ url_settingswidget::url_settingswidget(QString text[4], QString urls[4],QWidget 
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowTitle("change urls for recite");
     ui->engtext1->setText(text[0]);
     ui->engtext2->setText(text[1]);
     ui->japtext1->setText(text[2]);
