@@ -32,13 +32,14 @@ for word in notebook:
     j -= 1
 
     print(''.join([str(len(exceptbook) + 1),' : ',word]))
-    exceptbook.add(word)
 
     url = "https://www.weblio.jp/content/{}".replace("{}",word)
     try:
         response = requests.get(url,headers=header) # ,proxies={"http":"http://127.0.0.1:10359"}
     except:
         break
+    exceptbook.add(word)
+
     soup = BeautifulSoup(response.content, 'html.parser')
 
     with suppress(AttributeError):
