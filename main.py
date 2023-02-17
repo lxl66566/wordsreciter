@@ -43,6 +43,14 @@ for word in notebook:
     forward.append('\t')
     reversed.append(word)
     reversed.append('\t')
+    
+    with suppress(AttributeError):
+        soup.find('span',class_="uk dpron-i").decompose()
+        Phonetic_symbol = soup.find('span',class_="pron dpron").text
+        forward.append(Phonetic_symbol)
+        forward.append('<br><br>')
+        reversed.append(Phonetic_symbol)
+        reversed.append('<br><br>')
 
     englishtranslation = []
     # english translation
