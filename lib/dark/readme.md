@@ -1,0 +1,1 @@
+look for https://github.com/ColinDuquesnoy/QDarkStyleSheet

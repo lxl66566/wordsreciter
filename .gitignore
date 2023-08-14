@@ -1,2 +1,6 @@
-wordsreciter.pro.user
+.xmake
+.cache
+build
 words
+trashbin
+test
