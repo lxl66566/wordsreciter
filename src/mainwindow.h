@@ -6,6 +6,7 @@
 #include "qtmetamacros.h"
 #include "see_notebook_widget.h"
 #include "settingswidget.h"
+// #include "windows.h"
 #include "wordschooser.h"
 #include <QMainWindow>
 #include <QRadioButton>
@@ -38,6 +39,7 @@ protected:
   void keyPressEvent(QKeyEvent *);
   //    void keyReleaseEvent(QKeyEvent *);
   void focusInEvent(QFocusEvent *);
+  // bool nativeEvent(const QByteArray &eventType, void *message, long *result);
 
 private:
   Ui::MainWindow *ui;
@@ -55,6 +57,5 @@ private:
   see_notebook_widget *notebook_widget;
   int open_pages_num = 10;
   int save_time = 30;
-  //    QVector<QWidget*> elements;
 };
 #endif // MAINWINDOW_H

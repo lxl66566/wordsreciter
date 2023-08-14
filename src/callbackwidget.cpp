@@ -3,16 +3,16 @@
 #include <QMouseEvent>
 #include <QTextFormat>
 
-
 callbackwidget::callbackwidget(QWidget *parent) : QDialog(parent) {
   setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
   setAttribute(Qt::WA_DeleteOnClose);
   setWindowOpacity(0.9);
-  //    setGeometry(200,200,80,20);
-  setFixedSize(80, 20);
+  setGeometry(0, 0, 75, 20);
+  setFixedSize(75, 20);
   m_areaMovable = geometry();
   QLabel *lable = new QLabel(this);
   lable->setText("点击记单词");
+  lable->setFixedWidth(75);
   lable->show();
 }
 

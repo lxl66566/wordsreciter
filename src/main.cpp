@@ -1,10 +1,11 @@
+#include "globalshortcut.h"
 #include "mainwindow.h"
-#include "qshortcut.h"
 #include <QApplication>
 #include <QFile>
 #include <QSettings>
 #include <QShortCut>
 #include <QStyleFactory>
+
 
 void set_dark() {
   qApp->setStyle(QStyleFactory::create("Fusion"));
@@ -41,9 +42,7 @@ int main(int argc, char *argv[]) {
   set_dark();
 #endif
 
-  // QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+LEFT"), &w);
-  QShortcut shortcut = QShortcut(QKeySequence("Ctrl+LEFT"), &w);
-  QObject::connect(&shortcut, &QShortcut::activated, &w,
-                   &MainWindow::activated);
+  GlobalShortCut *shortcut = new GlobalShortCut("Ctrl+LEFT", &w);
+  QObject::connect(shortcut, SIGNAL(activated()), &w, SLOT(activated()));
   return a.exec();
 }

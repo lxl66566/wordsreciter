@@ -5,24 +5,21 @@
 #include <QDebug>
 #include <QIcon>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QTimer>
 #include <QVector>
+#include <algorithm>
 
-bool is_alpha(QString s) {
-  for (auto i = s.begin(); i != s.end(); ++i)
-    if (!((*i) >= 'a' && (*i) <= 'z') && !((*i) >= 'A' && (*i) <= 'Z'))
-      return false;
-  return true;
-}
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   setWindowTitle("reciter");
   setAttribute(Qt::WA_DeleteOnClose);
+  setWindowIcon(QIcon(":/static/icon.ico"));
   setWindowFlags(Qt::WindowStaysOnTopHint);
   setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
-  language = "english";
 
+  language = "english";
   callback = new callbackwidget(this);
   callback->hide();
   connect(callback, &callbackwidget::activate, this, &MainWindow::activated);
@@ -123,11 +120,16 @@ void MainWindow::clear_message() { ui->message->clear(); }
 
 void MainWindow::add_word() {
   if (ui->word->text().isEmpty()) {
-    //        give_message("请输入单词！");
     activated();
     return;
   }
-  if (is_alpha(ui->word->text())) {
+  // check if word is english
+  if ([](const QString &s) -> bool {
+        return std::ranges::all_of(s, [](const QChar &c) {
+          return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '-' ||
+                 c == ' ';
+        });
+      }(ui->word->text())) {
     if (language != "english") {
       language = "english";
       reciter->change_language_with_save("english");

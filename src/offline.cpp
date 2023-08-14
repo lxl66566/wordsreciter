@@ -6,7 +6,7 @@
 offline::offline(QWidget *parent) : QWidget(parent), ui(new Ui::offline) {
   ui->setupUi(this);
   setWindowTitle("offline recite mode");
-  //    setWindowIcon(QIcon(":/icon/icon.ico"));
+  setWindowIcon(QIcon(":/static/icon.ico"));
   setAttribute(Qt::WA_DeleteOnClose);
   buttongroup = new QButtonGroup(this);
   buttongroup->addButton(ui->eng1, 0);
@@ -20,7 +20,6 @@ offline::offline(QWidget *parent) : QWidget(parent), ui(new Ui::offline) {
   buttongroup->addButton(ui->eng9, 8);
   buttongroup->addButton(ui->eng10, 9);
   buttongroup->addButton(ui->jap1, 10);
-  //    ui->word->setText(QDir::currentPath());
   reciter = new wordschooser("english", englishfile);
   for (int i = 0; i <= 9; ++i) {
     connect(buttongroup->button(i), &QRadioButton::toggled, this, [=]() {

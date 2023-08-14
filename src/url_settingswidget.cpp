@@ -6,6 +6,7 @@ url_settingswidget::url_settingswidget(QString text[4], QString urls[4],
     : QDialog(parent), ui(new Ui::url_settingswidget) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
+  setWindowIcon(QIcon(":/static/icon.ico"));
   setWindowTitle("change urls for recite");
   ui->engtext1->setText(text[0]);
   ui->engtext2->setText(text[1]);
