@@ -3,9 +3,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QSettings>
-#include <QShortCut>
 #include <QStyleFactory>
-
 
 void set_dark() {
   qApp->setStyle(QStyleFactory::create("Fusion"));
@@ -43,6 +41,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   GlobalShortCut *shortcut = new GlobalShortCut("Ctrl+LEFT", &w);
-  QObject::connect(shortcut, SIGNAL(activated()), &w, SLOT(activated()));
+  QObject::connect(shortcut, &GlobalShortCut::activated, &w,
+                   &MainWindow::change_visibility);
   return a.exec();
 }

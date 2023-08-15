@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
   setWindowTitle("reciter");
   setAttribute(Qt::WA_DeleteOnClose);
-  setWindowIcon(QIcon(":/static/icon.ico"));
+  // setWindowIcon(QIcon(":/static/logo.ico"));
   setWindowFlags(Qt::WindowStaysOnTopHint);
   setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
 
