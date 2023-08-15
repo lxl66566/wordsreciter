@@ -30,8 +30,8 @@ offline::offline(QWidget *parent) : QWidget(parent), ui(new Ui::offline) {
       reciter->change_type(englishfile);
       reciter->change_file(QString("./words/") +
                            buttongroup->button(i)->text() + QString(".json"));
-      if (!reciter->get_error_message().isEmpty()) {
-        ui->word->setText(reciter->get_error_message());
+      if (!reciter->get_error_str().isEmpty()) {
+        ui->word->setText(reciter->get_error_str());
         return;
       }
       reciter->get_words_set();
@@ -45,8 +45,8 @@ offline::offline(QWidget *parent) : QWidget(parent), ui(new Ui::offline) {
     reciter->change_language("japanese");
     reciter->change_type(japanesefile);
     reciter->change_file("./words/日本語.json");
-    if (!reciter->get_error_message().isEmpty()) {
-      ui->word->setText(reciter->get_error_message());
+    if (!reciter->get_error_str().isEmpty()) {
+      ui->word->setText(reciter->get_error_str());
       return;
     }
     reciter->get_words_set();
@@ -55,7 +55,10 @@ offline::offline(QWidget *parent) : QWidget(parent), ui(new Ui::offline) {
   connect(ui->next, &QPushButton::clicked, this, [=]() { flush_text(); });
 }
 
-offline::~offline() { delete ui; }
+offline::~offline() {
+  delete ui;
+  delete reciter;
+}
 
 void offline::flush_text() {
   if (!flag_choose)

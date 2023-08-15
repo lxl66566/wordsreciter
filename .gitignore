@@ -1,5 +1,6 @@
 .xmake
 .cache
+.vscode
 build
 words
 trashbin

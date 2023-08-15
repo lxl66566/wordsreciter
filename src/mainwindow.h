@@ -31,15 +31,13 @@ public:
 private slots:
   void settings(int, int, QString, QString);
 public slots:
-  void activated();
+  void change_visibility();
 
 protected:
   void closeEvent(QCloseEvent *);
   void changeEvent(QEvent *);
   void keyPressEvent(QKeyEvent *);
-  //    void keyReleaseEvent(QKeyEvent *);
   void focusInEvent(QFocusEvent *);
-  // bool nativeEvent(const QByteArray &eventType, void *message, long *result);
 
 private:
   Ui::MainWindow *ui;

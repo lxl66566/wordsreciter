@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "callbackwidget.h"
+#include "qstringview.h"
 #include "ui_mainwindow.h"
 #include <QButtonGroup>
 #include <QDebug>
@@ -22,11 +23,11 @@ MainWindow::MainWindow(QWidget *parent)
   language = "english";
   callback = new callbackwidget(this);
   callback->hide();
-  connect(callback, &callbackwidget::activate, this, &MainWindow::activated);
-
+  connect(callback, &callbackwidget::activate, this,
+          &MainWindow::change_visibility);
   reciter = new wordschooser(language, notebook);
-
   setting = new settingswidget(this);
+
   setting->hide();
   settings(setting->pages, setting->auto_save_time,
            !setting->eng_selected ? setting->urls[0] : setting->urls[1],
@@ -57,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     reciter->clear_last();
   });
 
-  ui->message->setText(reciter->get_error_message());
+  ui->message->setText(reciter->get_error_str());
   connect(ui->submit, &QPushButton::clicked, this, &MainWindow::add_word);
   connect(ui->undo, &QPushButton::clicked, this, [=]() {
     auto temp = reciter->undo();
@@ -109,7 +110,10 @@ MainWindow::MainWindow(QWidget *parent)
   timer_save->start(save_time * 1000);
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+  delete ui;
+  delete reciter;
+}
 
 void MainWindow::give_message(QString s) {
   ui->message->setText(s);
@@ -120,11 +124,11 @@ void MainWindow::clear_message() { ui->message->clear(); }
 
 void MainWindow::add_word() {
   if (ui->word->text().isEmpty()) {
-    activated();
+    change_visibility();
     return;
   }
   // check if word is english
-  if ([](const QString &s) -> bool {
+  if ([](const QStringView &s) -> bool {
         return std::ranges::all_of(s, [](const QChar &c) {
           return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '-' ||
                  c == ' ';
@@ -150,26 +154,22 @@ void MainWindow::add_word() {
   ui->word->setFocus();
 }
 
-void MainWindow::activated() {
-  switch (isVisible()) {
-  case true:
+void MainWindow::change_visibility() {
+  if (isVisible()) {
     this->hide();
     callback->show();
-    break;
-  default:
+  } else {
     show();
     showNormal();
     raise();
     activateWindow();
     ui->word->setFocus();
     callback->hide();
-    break;
   }
-  return;
 }
 
-void MainWindow::settings(int words_num, int autosavetime, QString website,
-                          QString url2) {
+void MainWindow::settings(const int words_num, const int autosavetime,
+                          const QString website, const QString url2) {
   ui->elements->show();
   ui->menubar->show();
   save_time = autosavetime;
@@ -207,15 +207,5 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
   if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return)
     add_word();
 }
-
-// void MainWindow::keyReleaseEvent(QKeyEvent *e)
-//{
-//     if(e->key() == Qt::Key_Insert || e->key() == Qt::Key_PageUp || e->key()
-//     == Qt::Key_PageDown)
-//     {
-//         hide();
-//         callback->show();
-//     }
-// }
 
 void MainWindow::focusInEvent(QFocusEvent *) { ui->word->setFocus(); }
